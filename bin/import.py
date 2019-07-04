@@ -89,7 +89,7 @@ def main(args):
 
         dashboard.generate()
 
-        if settings.grafana['host']:
+        if settings.grafana.get('host'):
             try:
                 dash_url = dashboard.upload()
             except Exception as e:
@@ -97,7 +97,7 @@ def main(args):
             else:
                 print("{0} A Grafana dashboard has been successfully uploaded to {1}".format(Symbol.OK_GREEN, dash_url))
 
-        if settings.grafana['filename']:
+        if settings.grafana.get('filename'):
             try:
                 dashboard.save()
             except Exception as e:
