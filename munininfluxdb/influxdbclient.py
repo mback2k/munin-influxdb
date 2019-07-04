@@ -26,11 +26,12 @@ class InfluxdbClient:
 
     def connect(self, silent=False):
         try:
+            use_ssl = (int(self.settings.influxdb['port']) == 443)
             client = influxdb.InfluxDBClient(self.settings.influxdb['host'],
                                              self.settings.influxdb['port'],
                                              self.settings.influxdb['user'],
-                                             self.settings.influxdb['password']
-                                             )
+                                             self.settings.influxdb['password'],
+                                             ssl=use_ssl, verify_ssl=use_ssl)
 
             # dummy request to test connection
             client.get_list_database()
